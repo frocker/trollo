@@ -35,6 +35,7 @@ class List extends React.Component {
             checked={this.props.list.allComplete}
             className="big_checkbox"
             onChange={() => this.props.toggleAllComplete(this.props.listIndex)}
+            
           />
 
           <h2>{list.title}</h2>

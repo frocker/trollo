@@ -1,12 +1,12 @@
-# Welcome to the Laka Technical Test!
+# Laka Technical Test - Felix's Submission
 
-Trollo is an application designed to function as a TODO list for forgetful developers. It is a server rendered React application using [Zeit's next.js](https://github.com/zeit/next.js/) framework.
+## Todo Component
+- Pretty basic, supports delete, toggle and edit methods.
+- Added a few flexbox rules to line everything up nicely, but didn't really get into styling.
 
-The test is designed to assess frontend skills and shouldn't take you more than two hours to complete. 
+## CheckAllComplete Method
+- Assumes complete, and breaks on finding first incomplete
+- More efficent in terms of code & computation 
 
-* The `components/Todo.js` component has gone missing! You will need to implement it from scratch
-* Think about how the code could be optimised in components/Board.js, particularly the `checkAllComplete` function.
-* Currently if you refresh the page, all your todo lists are gone forever! How could the state be saved?
-* And finally, this is a great opportunity to show off your skills - feel free to chop and change the styling and flow of the app!
-
-If you have any questions, please get in touch with us and we will do our best to help.  When you are done, just make a pull request back to the repository and ping us an email.
+- Added perisistance, used simple local storage for this task
+- Automatically saves and loads using `ComponentWillUpdate` and `ComponentOnMount` as triggers.

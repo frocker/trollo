@@ -21,6 +21,23 @@ class Board extends React.Component {
     this.updateTodo = this.updateTodo.bind(this);
   }
 
+  componentDidMount() {
+    try {
+      const localLists = JSON.parse(localStorage.getItem('lists')) || []
+      this.setState({ lists: localLists });
+      console.log("Loading local lists:");
+      console.log(localLists);
+    } catch(error) {
+      console.log("Error parsing JSON:", localStorage.getItem('lists'));
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("Updating local lists:");
+    console.log(nextState.lists);
+    localStorage.setItem('lists', JSON.stringify(nextState.lists));
+  }
+
   editingTodoHandler(listIndex, todoIndex) {
     const oldTodoText = this.state.lists[listIndex].todos[todoIndex].todoText;
     this.setState({
@@ -51,17 +68,13 @@ class Board extends React.Component {
   checkAllComplete(listIndex) {
     const currentList = this.state.lists[listIndex];
     const todos = currentList.todos;
-    const totalTodos = todos.length;
-    let completedTodos = 0;
-
-    todos.forEach(todo => {
-      todo.complete && completedTodos++;
-    });
-
-    if (completedTodos === totalTodos) {
-      currentList.allComplete = true;
-    } else {
-      currentList.allComplete = false;
+  
+    currentList.allComplete = true;
+    for (let todo of todos) {
+      if(!todo.complete){
+        currentList.allComplete = false;
+        break;
+      }
     }
 
     const updatedLists = this.state.lists;
@@ -82,9 +95,8 @@ class Board extends React.Component {
         todo.complete = true;
       }
     });
-    this.checkAllComplete(listIndex);
 
-    // todo.complete = !currentList.allComplete;
+    this.checkAllComplete(listIndex);
   }
 
   saveTodo(listIndex, todoText) {
