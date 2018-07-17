@@ -8,5 +8,6 @@
 - Assumes complete, and breaks on finding first incomplete
 - More efficent in terms of code & computation 
 
+## Persistant storage
 - Added perisistance, used simple local storage for this task
 - Automatically saves and loads using `ComponentWillUpdate` and `ComponentOnMount` as triggers.
